@@ -2,7 +2,7 @@
 import express from "express";
 import {
   createBlogController,
-  getBlogController,
+  getBlogbySlugController,
   getBlogsController,
   updateBlogController,
 } from "../controller/blog.controller";
@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 router.get("/", getBlogsController);
-router.get("/:id", getBlogController);
+router.get("/:slug", getBlogbySlugController);
 router.post("/", createBlogController);
 router.patch("/:id", updateBlogController);
 
