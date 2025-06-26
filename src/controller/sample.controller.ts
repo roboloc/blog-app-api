@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { getSampleService } from "../sample/get-sample.service";
-import { getSamplesService } from "../sample/get-samples.service";
+import { getSampleService } from "../services/sample/get-sample.service";
+import { getSamplesService } from "../services/sample/get-samples.service";
 
 export const getSamplesController = async (
   request: Request,
