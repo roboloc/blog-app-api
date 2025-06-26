@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { createBlogService } from "../services/blog/create-blog.service";
-import { getBlogsService } from "../services/blog/get-blogs-service";
+import { getBlogsService } from "../services/blog/get-blogs.service";
 import { getBlogService } from "../services/blog/get-blog-service";
 import { updateBlogService } from "../services/blog/update-blog.service";
 
@@ -10,7 +10,15 @@ export const getBlogsController = async (
   next: NextFunction
 ) => {
   try {
-    const result = await getBlogsService();
+    const query = {
+      page: parseInt(request.query.page as string) || 1,
+      take: parseInt(request.query.take as string) || 5,
+      sortOrder: (request.query.sortOrder as string) || "desc",
+      sortBy: (request.query.sortBy as string) || "createdAt",
+      search: (request.query.search as string) || "",
+    };
+
+    const result = await getBlogsService(query);
     response.status(200).send(result);
   } catch (error) {
     next(error);
